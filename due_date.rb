@@ -23,7 +23,7 @@ class DueDate
   end
 
   def add_hours(hour)
-    @ret + hour
+    @ret + hour*60*60
   end
 
   def get_time
