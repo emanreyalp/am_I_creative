@@ -12,11 +12,11 @@ class DueDate
     add_hours(hours)
   end
 
-  def add_minutes
+  def add_minutes(min)
 
   end
 
-  def add_hours
+  def add_hours(hour)
 
   end
 end
