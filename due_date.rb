@@ -6,7 +6,7 @@ class DueDate
     @submit_date = submit_date
     @ret = submit_date
 
-    return @ret
+#    return @ret
   end
 
   def add_time(turnaround_time)
@@ -15,11 +15,15 @@ class DueDate
 
     @ret = add_minutes(mins)
     @ret = add_hours(hours)
-    return get_time
+    get_time
   end
 
   def add_minutes(min)
-    @ret + min*60
+    @ret = @ret + min*60
+    if(@ret.hour >= 17)
+      @ret = add_hours(16)
+    end
+    @ret
   end
 
   def add_hours(hour)
@@ -27,6 +31,6 @@ class DueDate
   end
 
   def get_time
-    return @ret
+    @ret
   end
 end
