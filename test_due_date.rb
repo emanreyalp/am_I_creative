@@ -19,31 +19,31 @@ class TestDueDate < Test::Unit::TestCase
 
   def test_add_hours
     res = DueDate.new(Time.local(2017,3,9,15,40)).add_time("1:00")
-    exp = Time.local(2017,3,9,16,40)
+    exp = DueDate.new(Time.local(2017,3,9,16,40)).get_time
     assert_equal(exp, res)
   end
 
   def test_hour_overflow_cause_of_the_minutes
     res = DueDate.new(Time.local(2017,3,9,15,40)).add_time("0:30")
-    exp = Time.local(2017,3,9,16,10)
+    exp = DueDate.new(Time.local(2017,3,9,16,10)).get_time
     assert_equal(exp, res)
   end
 
   def test_add_hours_and_minutes
     res = DueDate.new(Time.local(2017,3,9,15,40)).add_time("1:10")
-    exp = Time.local(2017,3,9,16,50)
+    exp = DueDate.new(Time.local(2017,3,9,16,50)).get_time
     assert_equal(exp, res)
   end
 
   def test_day_overflow_cause_of_the_minutes
     res = DueDate.new(Time.local(2017,3,9,16,40)).add_time("0:30")
-    exp = Time.local(2017,3,10,9,10)
+    exp = DueDate.new(Time.local(2017,3,10,9,10)).get_time
     assert_equal(exp, res)
   end
 
   def test_day_overflow_cause_of_the_hours
     res = DueDate.new(Time.local(2017,3,9,16,40)).add_time("1:00")
-    exp = Time.local(2017,3,10,9,40)
+    exp = DueDate.new(Time.local(2017,3,10,9,40)).get_time
     assert_equal(exp, res)
   end
 end

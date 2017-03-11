@@ -14,7 +14,7 @@ class DueDate
     @time = add_minutes(mins)
     @time = add_hours(hours)
     get_time
-    #return DueDate.new(@time)
+    return DueDate.new(@time).get_time
   end
 
   def get_time
