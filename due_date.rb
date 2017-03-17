@@ -26,15 +26,17 @@ private
   def add_minutes(work_min)
     @time += work_min * minute_in_seconds
     if(@time.hour >= 17)
-      @time = add_hours(16)
+      overflow_a_day
     end
     @time
   end
 
   def add_hours(work_hour)
+    add_days(work_hour / 8)
+    work_hour -= (work_hour / 8) * 8
     @time += work_hour * hour_in_seconds
     if(@time.hour >= 17)
-      @time += 16 * hour_in_seconds
+      overflow_a_day
     end
     @time
   end
@@ -43,9 +45,14 @@ private
     if work_day < 5
       return @time += work_day * day_in_seconds
     else
-      rest = work_day - work_day/5
-      return @time += ((work_day/5) + rest) * day_in_seconds
+      week = work_day/5
+      work_day -= week*5
+      return @time += (week*7 + work_day) * day_in_seconds
     end
+  end
+
+  def overflow_a_day
+    @time += 16 * hour_in_seconds
   end
 
   def minute_in_seconds
