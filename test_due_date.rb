@@ -64,4 +64,10 @@ class TestDueDate < Test::Unit::TestCase
     exp = DueDate.new(Time.local(2017,3,24,9,10)).get_time
     assert_equal(exp, res)
   end
+
+  def test_week_overflow_cause_of_the_hours
+    res = DueDate.new(Time.local(2017,3,10,15,0)).add_time("3:00")
+    exp = DueDate.new(Time.local(2017,3,13,10,0)).get_time
+    assert_equal(exp, res)
+  end
 end

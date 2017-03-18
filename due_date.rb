@@ -38,6 +38,9 @@ private
     if(@time.hour >= 17)
       overflow_a_day
     end
+    if(@time.saturday?)
+      overflow_a_weekend
+    end
     @time
   end
 
@@ -53,6 +56,10 @@ private
 
   def overflow_a_day
     @time += 16 * hour_in_seconds
+  end
+
+  def overflow_a_weekend
+    @time += 2 * day_in_seconds
   end
 
   def minute_in_seconds
