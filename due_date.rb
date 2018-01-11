@@ -13,11 +13,10 @@ class DueDate
 
     @time = add_minutes(mins)
     @time = add_hours(hours)
-    get_time
-    DueDate.new(@time).get_time
+    DueDate.new(@time).time?
   end
 
-  def get_time
+  def time?
     @time
   end
 
