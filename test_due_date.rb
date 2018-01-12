@@ -70,4 +70,16 @@ class TestDueDate < Test::Unit::TestCase
     exp = DueDate.new(Time.local(2017, 3, 13, 10, 0)).time?
     assert_equal(exp, res)
   end
+
+  def test_daylight_saving_time_ending
+    res = DueDate.new(Time.local(2017, 3, 24, 15, 0)).add_time('3:00')
+    exp = DueDate.new(Time.local(2017, 3, 27, 10, 0)).time?
+    assert_equal(exp, res)
+  end
+
+  def test_daylight_saving_time_starting
+    res = DueDate.new(Time.local(2017, 10, 27, 15, 0)).add_time('3:00')
+    exp = DueDate.new(Time.local(2017, 10, 30, 10, 0)).time?
+    assert_equal(exp, res)
+  end
 end
