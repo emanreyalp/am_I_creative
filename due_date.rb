@@ -8,12 +8,17 @@ class DueDate
   end
 
   def add_time(turnaround_time)
+    dst_before = @time.dst?
+
     hours = turnaround_time.split(':')[0].to_i
     mins = turnaround_time.split(':')[1].to_i
 
     @time = add_minutes(mins)
     @time = add_hours(hours)
-    DueDate.new(@time).time?
+
+    check_dst(dst_before, @time.dst?)
+
+    time?
   end
 
   def time?
@@ -53,6 +58,16 @@ class DueDate
 
   def overflow_a_weekend
     @time += 2 * day_in_seconds
+  end
+
+  def check_dst(dst_before, dst_now)
+    return if dst_before == dst_now
+
+    if dst_before
+      add_time('1:00')
+    else
+      add_time('-1:00')
+    end
   end
 
   def minute_in_seconds
