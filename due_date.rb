@@ -29,7 +29,7 @@ class DueDate
 
   def add_minutes(work_min)
     @time += work_min * minute_in_seconds
-    overflow_a_day if @time.hour >= 17
+    check_overflow!
     @time
   end
 
@@ -37,8 +37,7 @@ class DueDate
     add_days(work_hour / 8)
     work_hour -= (work_hour / 8) * 8
     @time += work_hour * hour_in_seconds
-    overflow_a_day if @time.hour >= 17
-    overflow_a_weekend if @time.saturday?
+    check_overflow!
     @time
   end
 
@@ -68,6 +67,11 @@ class DueDate
     else
       add_time('-1:00')
     end
+  end
+
+  def check_overflow!
+    overflow_a_day if @time.hour >= 17
+    overflow_a_weekend if @time.saturday?
   end
 
   def minute_in_seconds
