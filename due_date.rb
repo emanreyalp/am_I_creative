@@ -5,12 +5,10 @@ require "core_ext/time"
 
 class DueDate
   def initialize(submit_date)
-    @submit_date = submit_date
     @time = submit_date
   end
 
   def add_time(turnaround_time)
-    dst_before = @time.dst?
 
     hours = turnaround_time.split(':')[0].to_i
     mins = turnaround_time.split(':')[1].to_i
