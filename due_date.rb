@@ -4,6 +4,8 @@
 require 'core_ext/time'
 
 class DueDate
+  attr_reader :time
+
   def initialize(submit_date)
     @time = submit_date
   end
@@ -15,10 +17,6 @@ class DueDate
     add_minutes(mins)
     add_hours(hours)
 
-    time?
-  end
-
-  def time?
     @time
   end
 
