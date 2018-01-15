@@ -23,6 +23,18 @@ class TestDueDate < Test::Unit::TestCase
     assert_equal(exp, res)
   end
 
+  def test_add_a_work_day
+    res = DueDate.new(Time.local(2017, 3, 9, 15, 40)).add_time('8:00')
+    exp = DueDate.new(Time.local(2017, 3, 10, 15, 40)).time?
+    assert_equal(exp, res)
+  end
+
+  def test_add_a_work_week
+    res = DueDate.new(Time.local(2017, 3, 9, 15, 40)).add_time('40:00')
+    exp = DueDate.new(Time.local(2017, 3, 16, 15, 40)).time?
+    assert_equal(exp, res)
+  end
+
   def test_hour_overflow_cause_of_the_minutes
     res = DueDate.new(Time.local(2017, 3, 9, 15, 40)).add_time('0:30')
     exp = DueDate.new(Time.local(2017, 3, 9, 16, 10)).time?
