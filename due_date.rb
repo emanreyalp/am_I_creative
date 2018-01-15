@@ -4,6 +4,9 @@
 require 'core_ext/time'
 
 class DueDate
+  WORKDAY_LENGTH = 8
+  WORKWEEK_LENGTH = 5
+
   attr_reader :time
 
   def initialize(submit_date)
@@ -29,11 +32,11 @@ class DueDate
   end
 
   def add_hours(work_hour)
-    if work_hour > 8
-      days = work_hour / 8
+    if work_hour > WORKDAY_LENGTH
+      days = work_hour / WORKDAY_LENGTH
       add_days(days)
 
-      work_hour -= days * 8
+      work_hour -= days * WORKDAY_LENGTH
     end
 
     @time += work_hour.hour
@@ -42,11 +45,11 @@ class DueDate
   end
 
   def add_days(work_day)
-    if work_day >= 5
-      week = work_day / 5
+    if work_day >= WORKWEEK_LENGTH
+      week = work_day / WORKWEEK_LENGTH
       add_weeks(week)
 
-      work_day -= week * 5
+      work_day -= week * WORKWEEK_LENGTH
     end
 
     @time += work_day.day
