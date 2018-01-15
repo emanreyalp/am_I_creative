@@ -20,7 +20,7 @@ class DueDate
     add_minutes(mins)
     add_hours(hours)
 
-    @time
+    self
   end
 
   private
