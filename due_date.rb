@@ -13,7 +13,7 @@ class DueDate
     @time = submit_date
   end
 
-  def add_time(turnaround_time)
+  def add_time!(turnaround_time)
     hours = turnaround_time.split(':')[0].to_i
     mins = turnaround_time.split(':')[1].to_i
 
