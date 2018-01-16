@@ -28,7 +28,6 @@ class DueDate
   def add_minutes(work_min)
     @time += work_min.minute
     check_overflow!
-    @time
   end
 
   def add_hours(work_hour)
@@ -41,7 +40,6 @@ class DueDate
 
     @time += work_hour.hour
     check_overflow!
-    @time
   end
 
   def add_days(work_day)
