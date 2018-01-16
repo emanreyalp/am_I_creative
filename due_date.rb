@@ -4,6 +4,7 @@
 require 'core_ext/time'
 
 class DueDate
+  END_OF_SHIFT = 17
   WORKDAY_LENGTH = 8
   WORKWEEK_LENGTH = 5
 
@@ -58,15 +59,17 @@ class DueDate
   end
 
   def overflow_a_day
-    @time += 16.hour
+    HOURS_IN_DAY = 24
+    @time += (HOURS_IN_DAY - WORKDAY_LENGTH).hour
   end
 
   def overflow_a_weekend
-    @time += 2.day
+    DAYS_IN_WEEK = 7
+    @time += (DAYS_IN_WEEK - WORKWEEK_LENGTH).day
   end
 
   def check_overflow!
-    overflow_a_day if @time.hour >= 17
+    overflow_a_day if @time.hour >= END_OF_SHIFT
     overflow_a_weekend if @time.saturday?
   end
 end
